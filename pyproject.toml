@@ -22,7 +22,12 @@ exclude = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.10,<4.0"
+# Borne haute < 4.0 impossible ici : aucune version de PySide6 ne
+# déclare supporter une plage aussi large (chaque release plafonne
+# autour de 3.13/3.14), ce qui fait échouer le solveur Poetry ("no
+# versions of pyside6 match..."). Alignée sur ce que PySide6 supporte
+# réellement au moment du choix de cette borne.
+python = ">=3.10,<3.14"
 # Coeur : lecture/rendu d'image, jamais chargé en pleine résolution
 # inutilement (voir REFERENCE_TECHNIQUE.md pour la stratégie mémoire).
 numpy = "*"
