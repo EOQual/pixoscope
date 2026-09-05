@@ -1,0 +1,95 @@
+# Documentation de poetry: https://python-poetry.org/docs/pyproject/
+
+[tool.poetry]
+name = "pixoscope"
+version = "0.1.0"
+description = "Visualisateur d'images léger et performant, y compris sur de très grosses images"
+authors = ["Olivier Amram <olivier.amram@free.fr>"]
+maintainers = [
+    "Olivier Amram <olivier.amram@free.fr>"
+]
+repository = "https://github.com/EOQual/pixoscope.git"
+readme = "README.md"
+license = "MIT"
+keywords = ["image", "viewer", "visualization", "raster", "remote-sensing", "large-image"]
+packages = [{include = "pixoscope", from = "src"}]
+include = [
+    "src/pixoscope/ui/icons/*",
+]
+exclude = [
+    "**/__pycache__",
+    "**/.DS_Store",
+]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0"
+# Coeur : lecture/rendu d'image, jamais chargé en pleine résolution
+# inutilement (voir REFERENCE_TECHNIQUE.md pour la stratégie mémoire).
+numpy = "*"
+imageio = "*"
+# tifffile+zarr sont le pilier du fenêtrage/pyramide TIFF/BigTIFF, le
+# cas d'usage principal de pixoscope sur les grosses images -> dépendance
+# dure, pas un extra.
+tifffile = "*"
+zarr = "*"
+platformdirs = "*"
+loguru = "*"
+PySide6 = "*"
+
+# --- Extra "lum" : format .lum maison ---
+# Aucune dépendance tierce (numpy suffit) : plugin séparé pour ne pas
+# imposer ce format de niche à tout le monde.
+
+# --- Extra "gdal" : backend optionnel pour COG/JPEG2000 déjà pyramidés ---
+# Jamais requis pour l'usage courant (voir REFERENCE_TECHNIQUE.md §2).
+gdal = {version = "*", optional = true}
+
+# --- Extra "enhance" : algorithmes de rehaussement dynamique avancés ---
+# Le socle (Linear, contrast stretching, gamma simple) ne dépend que de
+# numpy. Les méthodes plus riches (CLAHE, LIME, Retinex, Ying...)
+# nécessitent opencv/scikit-image/scipy, gardés optionnels pour un
+# socle pixoscope léger.
+opencv-python-headless = {version = "*", optional = true}
+scikit-image = {version = "*", optional = true}
+scipy = {version = "*", optional = true}
+
+[tool.poetry.extras]
+lum = []
+gdal = ["gdal"]
+enhance = ["opencv-python-headless", "scikit-image", "scipy"]
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "*"
+sphinx-rtd-theme = "*"
+sphinx-autoapi = "*"
+
+[tool.poetry.group.dev.dependencies]
+poetry = "^2.1.1"
+ipython = "^8.8.0"
+black = "^23.3.0"
+coverage = "^6.5.0"
+pylint = "*"
+mypy = "*"
+ruff = "*"
+pytest = "<9"
+pytest-cov = "*"
+pytest-qt = "*"
+
+[tool.poetry.scripts]
+pixoscope = "pixoscope.cli:main"
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+warn_unused_ignores = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
