@@ -93,9 +93,9 @@ class ImageIOHandle(ImageHandle):
         return source[..., 0] if source.shape[-1] == 1 else source
 
     def close(self) -> None:
-        # Rien à libérer explicitement : le tableau décodé est laissé au
-        # ramasse-miettes avec le handle.
-        self._array = None
+        # Libère le tableau décodé (remplacé par un tableau vide du même
+        # type, pour garder un attribut de type ndarray).
+        self._array = np.empty((0, 0, self.n_bands), dtype=self._array.dtype)
 
 
 class ImageIOBackend(ImageBackend):

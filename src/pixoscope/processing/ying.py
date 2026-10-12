@@ -73,20 +73,28 @@ def _solve_linear_equation(image: np.ndarray, wx: np.ndarray, wy: np.ndarray, la
     return np.reshape(solved, (r, c), order="F")
 
 
-def _smooth(image: np.ndarray, lamda: float = 0.01, sigma: int = 3, sharpness: float = 0.001) -> np.ndarray:
+def _minmax_normalize(image: np.ndarray) -> np.ndarray:
+    """Normalisation min-max sur [0, 1] (``cv2.normalize``, ``NORM_MINMAX``).
+
+    Tableau de destination explicite : les annotations d'OpenCV n'acceptent
+    plus ``None`` pour ``dst`` (accepté à l'exécution, même résultat).
+    """
     import cv2
 
-    normalized = cv2.normalize(image.astype("float64"), None, 0.0, 1.0, cv2.NORM_MINMAX)
+    src = image.astype("float64")
+    return cv2.normalize(src, np.empty_like(src), 0.0, 1.0, cv2.NORM_MINMAX)
+
+
+def _smooth(image: np.ndarray, lamda: float = 0.01, sigma: int = 3, sharpness: float = 0.001) -> np.ndarray:
+    normalized = _minmax_normalize(image)
     wx, wy = _compute_texture_weights(normalized.copy(), sigma, sharpness)
     return _solve_linear_equation(normalized, wx, wy, lamda)
 
 
 def _rgb_to_geometric_mean(image: np.ndarray) -> np.ndarray:
-    import cv2
-
     if image.shape[2] != 3:
         return image
-    normalized = cv2.normalize(image.astype("float64"), None, 0.0, 1.0, cv2.NORM_MINMAX)
+    normalized = _minmax_normalize(image)
     return np.abs(normalized[:, :, 0] * normalized[:, :, 1] * normalized[:, :, 2]) ** (1 / 3)
 
 
@@ -150,7 +158,7 @@ def ying(image: np.ndarray, mu: float = 0.5, a: float = -0.3293, b: float = 1.12
 
     lamda = 0.5
     sigma = 5
-    normalized = cv2.normalize(image.astype("float64"), None, 0.0, 1.0, cv2.NORM_MINMAX)
+    normalized = _minmax_normalize(image)
 
     max_channel = np.max(normalized, axis=2)
     scale = 0.5

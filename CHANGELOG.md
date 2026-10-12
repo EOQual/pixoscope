@@ -4,7 +4,15 @@
 
 Non publié
 
-:   -   `license.txt` : titulaire des droits (Olivier Amram) au lieu du
+:   -   CI : mypy de nouveau sans erreur avec les annotations récentes de
+        numpy, OpenCV, zarr 3 et PySide6 (25 erreurs) — annotation
+        `SignalInstance`, destination explicite pour `cv2.normalize`
+        (résultat identique), conversion `np.asarray` des lectures zarr,
+        restriction de type des niveaux d'un groupe zarr, variable
+        distincte pour un `reshape`, tableau vide au lieu de `None` à la
+        fermeture du backend imageio, `cv2` non lié à `None` quand OpenCV
+        est absent. Aucun changement de comportement.
+    -   `license.txt` : titulaire des droits (Olivier Amram) au lieu du
         nom du module.
 
 0.1.0 (2026-09-04)

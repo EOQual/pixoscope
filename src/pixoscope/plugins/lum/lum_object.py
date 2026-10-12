@@ -132,8 +132,8 @@ class LumReader:
         offset = self._data_offset + start_row * self._row_offset_bytes
         with open(self.path, "rb") as handle:
             handle.seek(offset)
-            data = np.fromfile(handle, dtype=self.dtype, count=self.n_cols * n_rows)
-        data = data.reshape(n_rows, self.n_cols)
+            flat = np.fromfile(handle, dtype=self.dtype, count=self.n_cols * n_rows)
+        data = flat.reshape(n_rows, self.n_cols)
         if self._endian != _native_endianness():
             data = data.byteswap()
         return data

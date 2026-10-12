@@ -87,7 +87,12 @@ class TiffFileHandle(ImageHandle):
             # Groupe multi-résolution : les clés sont conventionnellement
             # "0", "1", ... du plus résolu au moins résolu.
             level_keys = sorted(opened.array_keys(), key=lambda k: int(k))
-            self._level_arrays: list[zarr.Array] = [opened[k] for k in level_keys]
+            self._level_arrays: list[zarr.Array] = []
+            for k in level_keys:
+                level = opened[k]
+                if not isinstance(level, zarr.Array):  # array_keys() ne liste que des tableaux
+                    raise TypeError(f"Niveau {k!r} du groupe zarr inattendu : {type(level).__name__}")
+                self._level_arrays.append(level)
         else:
             self._level_arrays = [opened]
 
@@ -111,16 +116,16 @@ class TiffFileHandle(ImageHandle):
         return spatial[0], spatial[1]
 
     def _slice_region(self, arr: zarr.Array, x: int, y: int, w: int, h: int, bands: Sequence[int] | None) -> np.ndarray:
+        # np.asarray : zarr renvoie déjà un ndarray, mais ses annotations
+        # (zarr 3) annoncent un type plus large.
         if self._band_axis is None:
-            region = arr[y : y + h, x : x + w]
-            return region
+            return np.asarray(arr[y : y + h, x : x + w])
         if self._band_axis == arr.ndim - 1:
-            region = arr[y : y + h, x : x + w, :]
+            region = np.asarray(arr[y : y + h, x : x + w, :])
             return region if bands is None else region[..., bands]
         # Axe bande en tête (ex. "SYX" -> lecture puis transposition en HWC
         # pour rester homogène avec le reste de pixoscope).
-        region = arr[:, y : y + h, x : x + w]
-        region = np.moveaxis(region, 0, -1)
+        region = np.moveaxis(np.asarray(arr[:, y : y + h, x : x + w]), 0, -1)
         return region if bands is None else region[..., bands]
 
     def read_region(

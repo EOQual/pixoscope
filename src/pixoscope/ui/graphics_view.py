@@ -39,7 +39,7 @@ try:
 
     _CV2_AVAILABLE = True
 except ImportError:  # pragma: no cover - dépendance optionnelle (extra "enhance")
-    cv2 = None
+    # cv2 n'est utilisé que derrière _CV2_AVAILABLE : inutile de le lier à None.
     _CV2_AVAILABLE = False
 
 _REFRESH_DELAY_MS = 80

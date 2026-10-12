@@ -22,7 +22,7 @@ from collections.abc import Callable
 from typing import Any
 
 from loguru import logger
-from PySide6.QtCore import QObject, QRunnable, Signal
+from PySide6.QtCore import QObject, QRunnable, Signal, SignalInstance
 
 from pixoscope.ui.qt_utils import global_thread_pool
 
@@ -81,7 +81,7 @@ class CallableWorker(QRunnable):
             self._safe_emit(self.signals.finished)
 
     @staticmethod
-    def _safe_emit(signal: Signal, *args: Any) -> None:
+    def _safe_emit(signal: SignalInstance, *args: Any) -> None:
         """Émet un signal en ignorant le cas où sa cible a déjà été détruite.
 
         Le widget qui a lancé cette tâche (une vue fermée, une fenêtre
