@@ -9,7 +9,7 @@ très grosses images (TIFF/BigTIFF multi-Go) — sans dépendance
 géospatiale/SIG. Fait partie d'[EOQual](https://github.com/EOQual), sans
 en être une bibliothèque : Pixoscope est une application autonome (IHM +
 CLI), pas un composant destiné à être importé par d'autres paquets
-`eoqual-*`. Voir **[REFERENCE_TECHNIQUE.md](REFERENCE_TECHNIQUE.md)**
+`eoqual-*`. Voir **[référence technique](docs/technique/reference.md)**
 pour l'architecture et les choix techniques, et
 **[THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md)** pour l'audit des
 dépendances tierces.
@@ -45,7 +45,7 @@ histogramme, et le socle d'algorithmes de rehaussement (linéaire,
 |---|---|---|---|
 | `enhance` | `pip install "pixoscope[enhance]"` | Les algorithmes de rehaussement avancés (CLAHE, HE, SUACE, Retinex, IAGCWD, DHE, EPMP, Ying, LIME/DUAL) | Dépend d'OpenCV, scikit-image, SciPy — gardés hors du socle pour rester léger |
 | `lum` | `pip install "pixoscope[lum]"` | Le format `.lum` maison | Aucune dépendance tierce en réalité (numpy suffit) — extra conservé pour documenter explicitement ce format de niche |
-| `gdal` | `pip install "pixoscope[gdal]"` | JPEG2000, COG déjà pyramidés, ECW/MrSID | GDAL n'apporte un gain réel que sur ces cas précis (voir `REFERENCE_TECHNIQUE.md` §2) — jamais requis sinon, et pénible à installer partout |
+| `gdal` | `pip install "pixoscope[gdal]"` | JPEG2000, COG déjà pyramidés, ECW/MrSID | GDAL n'apporte un gain réel que sur ces cas précis (voir [référence technique](docs/technique/reference.md) §2) — jamais requis sinon, et pénible à installer partout |
 
 Sans l'extra `enhance`, les algorithmes correspondants sont simplement
 absents du menu "Rehaussement" de l'IHM — aucun plantage au démarrage
@@ -92,7 +92,7 @@ pixoscope avant.tif apres.tif
 - **Mode comparaison** : deux vues côte à côte, zoom/pan synchronisables.
 - **Rehaussement dynamique** : socle numpy (linéaire, étirement,
   gamma, log, sigmoïde) + extra `enhance` pour les méthodes avancées —
-  voir `REFERENCE_TECHNIQUE.md` pour le détail de chacune.
+  voir [référence technique](docs/technique/reference.md) pour le détail de chacune.
 - **Format `.lum`** en plugin indépendant (`pixoscope[lum]`).
 
 ---
@@ -114,7 +114,7 @@ Voir **[CONTRIBUTING.md](CONTRIBUTING.md)**.
 ## Credits
 
 - Algorithmes de rehaussement implémentés à partir des dépôts et
-  publications référencés dans `REFERENCE_TECHNIQUE.md` et
+  publications référencés dans [référence technique](docs/technique/reference.md) et
   `THIRD_PARTY_LICENSES.md` (AndyHuang1995/Image-Contrast-Enhancement,
   bigmms/entropy-preserving-mapping-prior, leowang7/iagcwd,
   pvnieo/Low-light-Image-Enhancement, ravimalb/suace).

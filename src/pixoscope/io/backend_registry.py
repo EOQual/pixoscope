@@ -4,7 +4,7 @@ Ordre de priorité par défaut : plugin ``.lum`` (si installé, extra
 ``pixoscope[lum]``) > ``tifffile`` (TIFF/BigTIFF, fenêtrage + pyramide
 natifs) > ``imageio`` (repli générique PNG/JPEG/...) > plugin GDAL (si
 installé, extra ``pixoscope[gdal]`` — utile pour JPEG2000 ou les COG déjà
-pyramidés). GDAL n'est jamais requis : voir ``REFERENCE_TECHNIQUE.md``.
+pyramidés). GDAL n'est jamais requis : voir ``docs/technique/reference.md``.
 
 La variable d'environnement ``PIXOSCOPE_BACKEND`` force un backend par
 son ``name`` (ex. ``PIXOSCOPE_BACKEND=gdal``), utile pour comparer les

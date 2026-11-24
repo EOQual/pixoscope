@@ -1,6 +1,6 @@
 """Backend générique via ``imageio`` — PNG/JPEG/BMP/GIF et repli universel.
 
-Limite assumée et documentée (voir ``REFERENCE_TECHNIQUE.md``) : ces
+Limite assumée et documentée (voir ``docs/technique/reference.md``) : ces
 formats ne supportent pas de lecture fenêtrée native. La première lecture
 décode donc l'image entière, mise en cache en mémoire dans le handle ;
 les lectures suivantes ne font que découper ce tableau déjà décodé. Pour

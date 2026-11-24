@@ -1,7 +1,7 @@
 """Backend GDAL optionnel — extra ``pixoscope[gdal]``.
 
 Jamais requis pour l'usage courant de pixoscope (voir
-``REFERENCE_TECHNIQUE.md`` §2 pour la justification). Utile dans deux
+``docs/technique/reference.md`` §2 pour la justification). Utile dans deux
 cas où GDAL apporte un gain réel par rapport à ``tifffile``/``imageio`` :
 
 - lire des overviews déjà construites dans un GeoTIFF/COG (aucun calcul

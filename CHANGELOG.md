@@ -4,7 +4,13 @@
 
 Non publié
 
-:   -   CI : mypy de nouveau sans erreur avec les annotations récentes de
+:   -   Documentation réorganisée : documents techniques dans
+        `docs/technique/`, publiés avec l'API et les notes de version
+        par Sphinx et MyST (`docs/`). Les documents décrivent l'état
+        présent ; ce qui change d'une version à l'autre est dans ce
+        fichier, et les variantes de méthode écartées sont décrites au
+        présent dans les documents.
+    -   CI : mypy de nouveau sans erreur avec les annotations récentes de
         numpy, OpenCV, zarr 3 et PySide6 (25 erreurs) — annotation
         `SignalInstance`, destination explicite pour `cv2.normalize`
         (résultat identique), conversion `np.asarray` des lectures zarr,

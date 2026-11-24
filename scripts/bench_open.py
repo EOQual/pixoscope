@@ -2,7 +2,7 @@
 """Compare le coût d'ouverture "naïf" (image entière) vs pixoscope.
 
 Démontre le gain de la stratégie de lecture fenêtrée/pyramidale
-(voir ``REFERENCE_TECHNIQUE.md`` §2) : temps jusqu'au premier affichage
+(voir ``docs/technique/reference.md`` §2) : temps jusqu'au premier affichage
 et pic mémoire, pour lire une petite fenêtre d'un gros fichier.
 
 Exemples

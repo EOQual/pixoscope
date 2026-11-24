@@ -9,7 +9,7 @@ Fenêtrage : seule la plage de lignes demandée est lue depuis le disque
 (``LumReader.read_rows``) ; le découpage en colonnes se fait ensuite en
 mémoire sur cette plage déjà réduite — moins coûteux qu'une lecture
 complète, mais pas un vrai fenêtrage 2D natif (limite du format, voir
-``REFERENCE_TECHNIQUE.md``).
+``docs/technique/reference.md``).
 """
 
 from __future__ import annotations

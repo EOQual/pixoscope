@@ -29,7 +29,7 @@ exclude = [
 # réellement au moment du choix de cette borne.
 python = ">=3.10,<3.14"
 # Coeur : lecture/rendu d'image, jamais chargé en pleine résolution
-# inutilement (voir REFERENCE_TECHNIQUE.md pour la stratégie mémoire).
+# inutilement (voir docs/technique/reference.md pour la stratégie mémoire).
 numpy = "*"
 imageio = "*"
 # tifffile+zarr sont le pilier du fenêtrage/pyramide TIFF/BigTIFF, le
@@ -46,7 +46,7 @@ PySide6 = "*"
 # imposer ce format de niche à tout le monde.
 
 # --- Extra "gdal" : backend optionnel pour COG/JPEG2000 déjà pyramidés ---
-# Jamais requis pour l'usage courant (voir REFERENCE_TECHNIQUE.md §2).
+# Jamais requis pour l'usage courant (voir docs/technique/reference.md §2).
 gdal = {version = "*", optional = true}
 
 # --- Extra "enhance" : algorithmes de rehaussement dynamique avancés ---
@@ -67,6 +67,7 @@ enhance = ["opencv-python-headless", "scikit-image", "scipy"]
 sphinx = "*"
 sphinx-rtd-theme = "*"
 sphinx-autoapi = "*"
+myst-parser = "*"
 
 [tool.poetry.group.dev.dependencies]
 poetry = "^2.1.1"

@@ -110,7 +110,7 @@ class LumReader:
 
         C'est la seule opération de fenêtrage possible nativement sur ce
         format (pas de tuilage colonnes) — voir la limite documentée dans
-        ``REFERENCE_TECHNIQUE.md``.
+        ``docs/technique/reference.md``.
 
         Parameters
         ----------

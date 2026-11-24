@@ -1,7 +1,7 @@
 """Vue graphique tuilée — coeur du rendu performant sur grosses images.
 
 Simplification assumée par rapport au plan initial (voir
-``REFERENCE_TECHNIQUE.md``) : plutôt qu'une mosaïque de nombreuses
+``docs/technique/reference.md``) : plutôt qu'une mosaïque de nombreuses
 tuiles mises en cache indépendamment, cette vue ne maintient qu'**un
 seul raster**, couvrant la région actuellement visible (avec une marge),
 lu à la résolution de pyramide adaptée au zoom courant. C'est ce raster

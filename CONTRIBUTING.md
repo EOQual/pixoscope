@@ -61,5 +61,13 @@ sont générées à la volée).
 ## Documentation
 
 Toute méthode/backend nouveau ou modifié doit rester reflété dans
-`README.md` et `REFERENCE_TECHNIQUE.md` — les docstrings seules ne
+`README.md` et [référence technique](docs/technique/reference.md) — les docstrings seules ne
 suffisent pas, ces deux documents sont la carte d'ensemble du projet.
+
+## Documentation technique
+
+Les documents de `docs/technique/` décrivent l'état présent, sans dates ni
+numéros de version : ce qui change d'une version à l'autre va dans
+`CHANGELOG.md`, et une variante de méthode écartée se décrit au présent,
+dans la section « Variantes écartées » (ou « Choix de conception ») du
+document. Construction locale du site : `make html` dans `docs/`.

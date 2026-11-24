@@ -15,7 +15,7 @@ enregistré, et donc distribué "actif", que si
 :func:`enable_experimental_unlicensed_algorithms` est appelé
 explicitement — jamais au simple import du paquet.
 
-Voir ``REFERENCE_TECHNIQUE.md`` pour le détail de chaque algorithme.
+Voir ``docs/technique/reference.md`` pour le détail de chaque algorithme.
 """
 
 # L'import de chaque module déclenche ses décorateurs @ProcessingRegistry.register.
